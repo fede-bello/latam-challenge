@@ -20,7 +20,8 @@ repos:
         exclude: >-
           (?x)^(
               \.env.*\.example|
-              \.env.*\.sample
+              \.env.*\.sample|
+              .*\.ipynb
           )$
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
