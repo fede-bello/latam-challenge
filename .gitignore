@@ -2,3 +2,4 @@ reports/
 .venv/
 .coverage
 *.pyc
+model.pkl
