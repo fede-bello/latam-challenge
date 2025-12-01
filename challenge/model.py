@@ -5,8 +5,11 @@ from datetime import datetime
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+import joblib
 
 THRESHOLD_IN_MINUTES = 15
+
+MODEL_PATH = "challenge/model.pkl"
 
 
 class DelayModel:
@@ -78,6 +81,26 @@ class DelayModel:
     def _get_top_features(self, data: pd.DataFrame) -> pd.DataFrame:
         return data[self._TOP_10_FEATURES]
 
+    def _save_model(self, path: str) -> None:
+        """
+        Save the trained model to a file.
+
+        Args:
+            path (str): The file path where the model will be saved.
+        """
+
+        joblib.dump(self._model, path)
+
+    def _load_model(self, path: str) -> None:
+        """
+        Load a trained model from a file.
+
+        Args:
+            path (str): The file path from where the model will be loaded.
+        """
+
+        self._model = joblib.load(path)
+
     def preprocess(
         self, data: pd.DataFrame, target_column: str = None
     ) -> Union[Tuple[pd.DataFrame, pd.DataFrame], pd.DataFrame]:
@@ -121,7 +144,8 @@ class DelayModel:
             features (pd.DataFrame): preprocessed data.
             target (pd.DataFrame): target.
         """
-        X_train, X_test, y_train, y_test = train_test_split(
+        target = target.squeeze()
+        X_train, _, y_train, _ = train_test_split(
             features, target, test_size=0.33, random_state=42
         )
         n_y0, n_y1 = len(y_train[y_train == 0]), len(y_train[y_train == 1])
@@ -130,6 +154,8 @@ class DelayModel:
             class_weight={1: n_y0 / len(y_train), 0: n_y1 / len(y_train)}
         )
         self._model.fit(X_train, y_train)
+
+        self._save_model(MODEL_PATH)
 
     def predict(self, features: pd.DataFrame) -> List[int]:
         """
@@ -141,5 +167,7 @@ class DelayModel:
         Returns:
             (List[int]): predicted targets.
         """
+        if self._model is None:
+            self._load_model(MODEL_PATH)
         predictions = self._model.predict(features).tolist()
         return predictions
