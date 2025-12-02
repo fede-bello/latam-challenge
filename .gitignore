@@ -3,3 +3,4 @@ reports/
 .coverage
 *.pyc
 model.pkl
+.env
