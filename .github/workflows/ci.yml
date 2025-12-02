@@ -27,7 +27,7 @@ jobs:
         run: uv sync --group test
 
       - name: Run model tests
-        run: make model-test
+        run: uv run pytest --cov-config=.coveragerc --cov-report term --cov-report xml --junitxml=reports/junit.xml --cov=challenge tests/model
 
       - name: Run API tests
-        run: make api-test
+        run: uv run pytest --cov-config=.coveragerc --cov-report term --cov-report xml --junitxml=reports/junit.xml --cov=challenge tests/api
