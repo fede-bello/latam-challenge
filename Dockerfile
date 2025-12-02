@@ -15,7 +15,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 COPY pyproject.toml uv.lock ./
 
 # Install Python dependencies
-RUN uv sync --frozen --no-dev
+RUN uv sync --no-dev
 
 # Copy application code
 COPY . .
@@ -31,4 +31,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
 ENV PYTHONUNBUFFERED=1
 
 # Run the application
-CMD ["python", "main.py"]
+CMD ["uv", "run", "python", "main.py"]
