@@ -1,0 +1,52 @@
+# Version control
+.git
+.gitignore
+.github
+.gitattributes
+
+# Development
+.venv
+venv
+.env
+.env.local
+*.pyc
+__pycache__
+.pytest_cache
+.coverage
+.ruff_cache
+
+# IDEs and editors
+.vscode
+.idea
+*.swp
+*.swo
+*.swn
+*~
+.DS_Store
+.sublime-project
+.sublime-workspace
+
+# Documentation and README
+README.md
+docs/
+
+# Test and build artifacts
+tests/
+reports/
+build/
+dist/
+*.egg-info/
+coverage.xml
+.pre-commit-config.yaml
+
+# Data files (not needed in production)
+data/
+*.csv
+
+# Jupyter
+*.ipynb
+.ipynb_checkpoints/
+
+# Build files
+Makefile
+pyproject.toml.bak
