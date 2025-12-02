@@ -44,10 +44,11 @@ jobs:
             --platform managed \
             --region ${{ env.REGION }} \
             --project ${{ env.PROJECT_ID }} \
-            --service-account cloud-run-api@${{ env.PROJECT_ID }}.iam.gserviceaccount.com \
+            --service-account github-ci-cd@${{ env.PROJECT_ID }}.iam.gserviceaccount.com \
             --allow-unauthenticated \
             --set-env-vars GCS_MODEL_BUCKET=latam-challenge-models,GCS_MODEL_PATH=models/model.pkl \
             --memory 1Gi \
             --cpu 1 \
             --timeout 300 \
-            --quiet
+            --quiet \
+            --no-traffic
