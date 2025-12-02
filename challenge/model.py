@@ -79,7 +79,7 @@ class DelayModel:
         return min_diff
 
     def _get_top_features(self, data: pd.DataFrame) -> pd.DataFrame:
-        return data[self._TOP_10_FEATURES]
+        return data.reindex(columns=self._TOP_10_FEATURES, fill_value=0)
 
     def _save_model(self, path: str) -> None:
         """
