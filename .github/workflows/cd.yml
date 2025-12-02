@@ -27,7 +27,9 @@ jobs:
           export_default_credentials: true
 
       - name: Configure Docker authentication
-        run: gcloud auth configure-docker gcr.io --quiet
+        run: |
+          gcloud auth configure-docker gcr.io --quiet
+          gcloud auth application-default print-access-token | docker login -u oauth2accesstoken --password-stdin https://gcr.io
 
       - name: Build Docker image
         run: |
@@ -50,5 +52,4 @@ jobs:
             --memory 1Gi \
             --cpu 1 \
             --timeout 300 \
-            --quiet \
-            --no-traffic
+            --quiet
