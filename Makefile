@@ -21,7 +21,7 @@ venv:			## Create a virtual environment
 install:		## Install dependencies
 	uv sync --group test
 
-STRESS_URL = https://latam-api-240790801644.europe-west1.run.app
+STRESS_URL = https://latam-api-240790801644.us-central1.run.app
 .PHONY: stress-test
 stress-test:
 	# change stress url to your deployed app 
