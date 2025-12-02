@@ -48,7 +48,7 @@ jobs:
             --service-account github-ci-cd@${{ env.PROJECT_ID }}.iam.gserviceaccount.com \
             --allow-unauthenticated \
             --set-env-vars GCS_MODEL_BUCKET=latam-challenge-models,GCS_MODEL_PATH=models/model.pkl \
-            --memory 1Gi \
+            --memory 2Gi \
             --cpu 1 \
             --timeout 300 \
             --quiet
